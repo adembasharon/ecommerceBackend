@@ -7,7 +7,7 @@ if(authHeader){
 const token = authHeader.split(" ")[1]
 jwt.verify(token , process.env.JWT_SEC , (err,user)=>{
 
-    err ? res.status(403).json("Toke is Not Valid") : req.user=user
+    err ? res.status(403).json("Token is Not Valid") : req.user=user
     next()
 
 })
@@ -18,10 +18,8 @@ jwt.verify(token , process.env.JWT_SEC , (err,user)=>{
 
 
 }
-
-
-const VarifyTokenAndAuthorization=(req,res,next)=>{
-verifyToken((req,res)=>{
+const verifyTokenAndAuthorization=(req,res,next)=>{
+verifyToken(req,res,()=>{
 if(req.user.id===req.params.id || req.user.isAdmin ){
     next()
  } else{
@@ -30,9 +28,9 @@ if(req.user.id===req.params.id || req.user.isAdmin ){
 })
 }
 
-const varifyTokeAndAdmin=()=>{
+const verifyTokeAndAdmin=(req,res,next)=>{
 
-    verifyToken((req,res)=>{
+    verifyToken(req,res,()=>{
         if(req.user.isAdmin){
             next()
         }else{
@@ -41,4 +39,10 @@ const varifyTokeAndAdmin=()=>{
         }
     })
 }
-module.exports={varifyTokeAndAdmin , VarifyTokenAndAuthorization}
+
+
+
+
+
+
+module.exports={verifyTokeAndAdmin , verifyTokenAndAuthorization}

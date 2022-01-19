@@ -1,11 +1,11 @@
 const mongoose=require("mongoose")
 const productSchema=mongoose.Schema({
-productName:{type:String,unique:true,required:true },
-productPrice:{type:String,unique:true,required:true },
-productColor:{type:String,unique:true,required:true },
-productSize:{type:String,unique:true,required:true },
-productDescription:{type:String,unique:true,required:true },
-productImage:{type:String,unique:true,required:true }
+productName:{type:String,required:true },
+productPrice:{type:Number,required:true },
+productColor:{type:String,required:true },
+productSize:{type:String,required:true },
+productDescription:{type:String,required:true },
+productImage:{type:String,required:true }
 
 },
 {timestamps:true})
